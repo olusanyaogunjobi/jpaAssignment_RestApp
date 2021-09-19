@@ -1,10 +1,8 @@
 package se.lecicon.jpaassignment_recipeedatabase.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class RecipeCategory {
@@ -13,5 +11,67 @@ public class RecipeCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
     private String category;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "recipecategory")
     private List<Recipe> recipes;
+
+    public RecipeCategory() {
+    }
+
+    public RecipeCategory(int categoryId, String category, List<Recipe> recipes) {
+        this.categoryId = categoryId;
+        this.category = category;
+        this.recipes = recipes;
+    }
+
+    public RecipeCategory(String category, List<Recipe> recipes) {
+        this.category = category;
+        this.recipes = recipes;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RecipeCategory)) return false;
+        RecipeCategory that = (RecipeCategory) o;
+        return getCategory().equals(that.getCategory()) && getRecipes().equals(that.getRecipes());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCategory(), getRecipes());
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeCategory{" +
+                "categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                ", recipes=" + recipes +
+                '}';
+    }
 }
