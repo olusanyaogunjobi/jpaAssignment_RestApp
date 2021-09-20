@@ -8,6 +8,6 @@ public interface ingredientDAO {
 
     Ingredient findById (int ingredientId);
     Ingredient findByName (String ingredientName);
-    Ingredient findByNameWithAnySearchString (String ingredientName);
+    Ingredient findByIngredientName (Ingredient ingredient);
 
 }

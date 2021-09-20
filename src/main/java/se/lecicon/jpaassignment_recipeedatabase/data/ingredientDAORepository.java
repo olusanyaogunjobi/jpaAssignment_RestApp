@@ -20,15 +20,18 @@ public class ingredientDAORepository implements ingredientDAO{
 
         return entityManager.find(Ingredient.class, ingredientId);
     }
-    @Transactional
+
     @Override
-    public Ingredient findByNameWithAnySearchString(String ingredientName) {
-        return null;
+    @Transactional
+    public Ingredient findByName(String ingredientName) {
+
+        return entityManager.find(Ingredient.class, ingredientName);
     }
 
     @Override
-    public Ingredient findByName(String ingredientName) {
-        return null;
+    @Transactional
+    public Ingredient findByIngredientName(Ingredient ingredient) {
+        return entityManager.find(Ingredient.class, ingredient);
     }
 
 

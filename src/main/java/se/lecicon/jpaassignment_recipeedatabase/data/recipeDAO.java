@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface recipeDAO {
 
-    Recipe findByName (String recipeName);
-    List<RecipeIngredient> findByIngredientName (RecipeIngredient recipeIngredient);
-    List<RecipeCategory> findByRecipeCategory(RecipeCategory recipeCategory);
-    List<RecipeCategory> findByRecipeCategoryMatch (RecipeCategory recipeCategory);
+    Collection<Recipe> findByName (String recipeName);
+    Collection<Recipe> findByIngredientName (String ingredientName);
+    Collection<Recipe> findByRecipeCategory(RecipeCategory recipeCategory);
+    Collection<Recipe> findByRecipeCategoryMatch (String category);
 
 }
