@@ -1,6 +1,7 @@
 package se.lecicon.jpaassignment_recipeedatabase.data;
 
 import org.springframework.transaction.annotation.Transactional;
+import se.lecicon.jpaassignment_recipeedatabase.model.Ingredient;
 import se.lecicon.jpaassignment_recipeedatabase.model.Recipe;
 import se.lecicon.jpaassignment_recipeedatabase.model.RecipeCategory;
 import se.lecicon.jpaassignment_recipeedatabase.model.RecipeIngredient;
@@ -20,33 +21,35 @@ public class recipeDAORepository implements recipeDAO{
     @Transactional
     public Collection<Recipe> findByName(String recipeName) {
         return entityManager.createQuery(
-                        "SELECT r FROM Recipe r WHERE UPPER(r.recipeName) LIKE UPPER(CONCAT('%',:recipeName,'%')) " +
-                                "OR " +
-                                "UPPER(r.recipeName) LIKE UPPER(CONCAT('%', :name, '%')) ", Recipe.class)
+                        "SELECT r FROM Recipe r WHERE UPPER(r.recipeName) LIKE UPPER(CONCAT('%',:recipeName,'%')) ", Recipe.class)
                 .setParameter("recipeName", recipeName)
                 .getResultList();
     }
 
     @Override
     @Transactional
-    public Collection<Recipe> findByIngredientName(String ingredientName) {
-        return entityManager.createQuery("SELECT r FROM Recipe  r WHERE r.recipeName", Recipe.class)
+    public Collection<Recipe> findByIngredientName(String ingredientName) {  // change to string
+        return entityManager.createQuery(
+                "SELECT i FROM Ingredient i WHERE(i.ingredientName) LIKE UPPER (CONCAT('%',:ingredientName,'%'))", Recipe.class)
                 .setParameter("ingredientName", ingredientName)
                 .getResultList();
+
     }
 
     @Override
     @Transactional
-    public Collection<Recipe> findByRecipeCategory(RecipeCategory recipeCategory) {
-        return null;
+    public Collection<Recipe> findByRecipeCategory(String recipeCategory) {
+
+        return entityManager.createQuery("SELECT r FROM Recipe r WHERE(r.recipeName) LIKE UPPER(CONCAT('%',:recipeCategory,'%'))", Recipe.class)
+                .setParameter("recipeCategory", recipeCategory)
+                .getResultList();
     }
 
     @Override
     @Transactional
     public Collection<Recipe> findByRecipeCategoryMatch(String recipeCategory) {
         return entityManager.createQuery(
-                        "SELECT r FROM Recipe r WHERE UPPER(r.RecipeCategory) LIKE UPPER(CONCAT('%',:RecipeCategory,'%')) ",Recipe.class)
-                .setParameter("recipeCategory", recipeCategory)
-                .getResultList();
+                        "SELECT r FROM Recipe r",Recipe.class).getResultList();
+
     }
 }

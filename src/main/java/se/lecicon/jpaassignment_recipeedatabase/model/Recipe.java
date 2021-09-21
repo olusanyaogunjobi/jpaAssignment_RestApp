@@ -31,6 +31,26 @@ public class Recipe {
     private List<RecipeCategory> categories;
 
 
+    @ManyToOne
+    @JoinColumn(name = "recipeategory_category_id")
+    private RecipeCategory recipeCategory;
+
+    public RecipeCategory getRecipeCategory() {
+        return recipeCategory;
+    }
+
+    public void setRecipeCategory(RecipeCategory recipeCategory) {
+        this.recipeCategory = recipeCategory;
+    }
+
+    public RecipeCategory getRecipecategory() {
+        return recipeCategory;
+    }
+
+    public void setRecipecategory(RecipeCategory recipecategory) {
+        this.recipeCategory = recipecategory;
+    }
+
     public Recipe() {
 
     }

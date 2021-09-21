@@ -11,7 +11,7 @@ public interface recipeDAO {
 
     Collection<Recipe> findByName (String recipeName);
     Collection<Recipe> findByIngredientName (String ingredientName);
-    Collection<Recipe> findByRecipeCategory(RecipeCategory recipeCategory);
+    Collection<Recipe> findByRecipeCategory(String recipeCategory);
     Collection<Recipe> findByRecipeCategoryMatch (String category);
 
 }

@@ -8,7 +8,7 @@ public interface recipeIngredientDAO {
 
     RecipeIngredient create (RecipeIngredient recipeIngredient);
     RecipeIngredient findByIngredientId(String recipeIngredientId);
-    RecipeIngredient findAll();
+    Collection<RecipeIngredient>findAll();
     RecipeIngredient update (RecipeIngredient recipeIngredient);
     void delete (String recipeIngredientId);
 }
