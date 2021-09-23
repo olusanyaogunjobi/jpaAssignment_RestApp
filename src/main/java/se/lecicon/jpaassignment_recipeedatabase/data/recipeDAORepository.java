@@ -27,6 +27,13 @@ public class recipeDAORepository implements recipeDAO{
     }
 
     @Override
+    public Recipe create(Recipe recipe) {
+
+        entityManager.persist(recipe);
+        return recipe;
+    }
+
+    @Override
     @Transactional
     public Collection<Recipe> findByIngredientName(String ingredientName) {  // change to string
         return entityManager.createQuery(
@@ -51,5 +58,16 @@ public class recipeDAORepository implements recipeDAO{
         return entityManager.createQuery(
                         "SELECT r FROM Recipe r",Recipe.class).getResultList();
 
+    }
+
+    @Override
+    public Void delete(String recipeId) {
+        entityManager.remove(recipeId);
+        return null;
+    }
+
+    @Override
+    public Recipe update(Recipe recipe) {
+        return entityManager.merge(recipe);
     }
 }

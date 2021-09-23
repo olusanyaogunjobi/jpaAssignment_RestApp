@@ -3,7 +3,6 @@ package se.lecicon.jpaassignment_recipeedatabase.data;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.lecicon.jpaassignment_recipeedatabase.model.Ingredient;
-import se.lecicon.jpaassignment_recipeedatabase.model.Recipe;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,6 +23,13 @@ public class ingredientDAORepository implements ingredientDAO{
 
     @Override
     @Transactional
+    public Ingredient create(Ingredient ingredientId) {
+        entityManager.persist(ingredientId);
+        return ingredientId;
+    }
+
+    @Override
+    @Transactional
     public Ingredient findByName(String ingredientName) {
 
         return entityManager.createQuery(
@@ -38,8 +44,26 @@ public class ingredientDAORepository implements ingredientDAO{
     @Override
     @Transactional
     public Ingredient findByIngredientName(Ingredient ingredient) {// query but not necessary
+
+
+        
         return entityManager.find(Ingredient.class, ingredient);
+        
+        
+    }
+
+    @Override
+    @Transactional
+    public Void delete(int ingredientId) {
+        entityManager.remove(ingredientId);
+        return null;
+    }
+
+    @Override
+    public Ingredient update(Ingredient ingredient) {
+        return entityManager.merge(ingredient);
     }
 
 
 }
+ 

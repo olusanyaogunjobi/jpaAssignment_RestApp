@@ -12,7 +12,15 @@ public class RecipeCategory {
     private int categoryId;
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "recipecategory")
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "recipe_recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_category_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )//many to many
     private List<Recipe> recipes;
 
     public RecipeCategory() {
