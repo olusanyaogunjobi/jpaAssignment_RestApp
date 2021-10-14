@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public abstract class RecipeIngredient {
+public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String recipeIngredientId;
@@ -12,12 +12,12 @@ public abstract class RecipeIngredient {
     private double amount;
     private Measurement measurement;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
     public RecipeIngredient() {
