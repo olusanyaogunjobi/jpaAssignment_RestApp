@@ -1,12 +1,17 @@
 package se.lecicon.jpaassignment_recipeedatabase.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class RecipeIngredient {
+
+    @Column(nullable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String recipeIngredientId;
 
     private double amount;
